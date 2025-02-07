@@ -1,5 +1,6 @@
 ---
 title: "HW3 WH Salaries"
+Tess Phillips
 ---
 
 In this assignment, we will be working with a dataset containing information about the salaries of White House staffers as of July 2024.
@@ -9,6 +10,7 @@ In this assignment, we will be working with a dataset containing information abo
 You will need to load the tidyverse library
 
 ```{r}
+library(tidyverse)
 ```
 
 Then you'll load the data from the web. The URL for the data is: https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/biden_wh_salaries_2024.csv. You will create a dataframe called `wh_salaries` that contains the data from this URL.
@@ -16,19 +18,23 @@ Then you'll load the data from the web. The URL for the data is: https://raw.git
 ### Task 2: Load the Data and Describe It
 
 ```{r}
+wh_salaries <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/biden_wh_salaries_2024.csv")
 ```
+
 ### Task 3: Describe the Data
 
 You should examine that dataframe carefully by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the categories of incidents. From a reporting standpoint, what stands out to you about this data? Are there any salary values that will cause problems for analysis?
 
 ANSWER HERE
 
+This data shows a large number of White House employees, along with their annual salary, employment type, and position. There are 564 employees listed in this chart, and this large amount of people definitely caught my attention. Besides that, the biggest thing that stood out to me was the amount of people listed on the chart that are making $0 as their salary. These data points would present problems for analysts, as it would offset the mean and median, as well as just generally skewing the data. Reporting wise, I would like to know why these positions aren't making any money and talk to the people who hold those positions. 
+
 ### Task 4: Calculate the Mean and Median of the Salaries
 
 Write code to calculate the mean and median of the salaries in the dataset using the `summarize()` function. You don't need to make a new dataframe, just display the results.
 
 ```{r}
-
+wh_salaries |> summarise(mean_value = mean(salary), median_value = median(salary))
 ```
 
 ### Task 5: Add in the minimum and maximum salaries
@@ -36,7 +42,7 @@ Write code to calculate the mean and median of the salaries in the dataset using
 Take the code you just wrote and add in the minimum and maximum salaries (the functions for that are `min()` and `max()`). Your results should show four columns: mean_salary, median_salary, min_salary, max_salary.
 
 ```{r}
-
+wh_salaries |> summarise(mean_value = mean(salary), median_value = median(salary), min_value = min(salary), max_value = max(salary))
 ```
 
 ### Task 6: Describe the Results
@@ -45,8 +51,12 @@ Write a couple of sentences describing the results of your analysis. What do the
 
 ANSWER HERE
 
+The first thing that I noticed about the data with these patterns revealed was the wide range of salaries. Employees at the white house can get paid anything between $0 and $251,258, which is a pretty considerable gap in income. However, I did notice that the mean and median are close together. Thinking back to my STAT100 knowledge, when the mean and median are close in value, it indicates a symmetrical data set. However, I would consider the $0 salary values outliers, as they are greatly outnumbered by higher values. 
+
 ### Task 7: Story Idea
 
 Based on the data, what is your best story idea? What is the next step you would take to develop that story idea?
 
 ANSWER HERE
+
+I am most intrigued by the $0 salaries, as previously stated. I especially find it odd that a lot of the people making no money have a position that has a "senior" title. I would love to talk to a supervisor about the reasons for this. I would also like to talk to some of these employees and observe whether or not their experience/story aligns with what their supervisor says.
