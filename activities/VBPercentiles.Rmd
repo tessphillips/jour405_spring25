@@ -6,21 +6,35 @@ We'll be calculating percentiles to see how good Maryland was in service aces in
 
 ### Task 1: Load the tidyverse
 
+```{r}
+library(tidyverse)
+```
 
 ### Task 2: Load the data
 
+```{r}
+matches <- read_csv("https://raw.githubusercontent.com/dwillis/NCAAWomensVolleyballData/refs/heads/main/data/ncaa_womens_volleyball_matchstats_2024.csv")
+```
 
 ### Task 3: Create totals of aces for each team using `group_by()` and `summarize()`
+```{r}
+team_aces <- matches |> 
+  group_by(team) |> 
+  summarize(total_aces = sum(aces)) |> arrange(desc(total_aces))
+```
 
 
 ### Task 4: Calculate percentiles using `mutate()` and `ntile()`
+```{r}
+team_aces |> mutate(percentile = ntile(total_aces, 100))
+```
 
 
 ### Task 5: Describe the percentiles
 
 Write a couple of sentences that puts Maryland into context with the other teams in the dataset. You can do some Internet research to help with this.
 
-
+Although Maryland comes in the rankings at number 17, they are also in the 96th percentile. This means that UMD is the same as or better than 95 percent of the teams on the list. We mentioned this in class, but this aspect of the statistic is a better line for a story. It sheds a more positive light on UMD Volleyball stats rather than the rather negative ranking of being #17. 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
 
