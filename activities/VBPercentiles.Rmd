@@ -34,7 +34,7 @@ team_aces |> mutate(percentile = ntile(total_aces, 100))
 
 Write a couple of sentences that puts Maryland into context with the other teams in the dataset. You can do some Internet research to help with this.
 
-Although Maryland comes in the rankings at number 17, they are also in the 96th percentile. This means that UMD is the same as or better than 95 percent of the teams on the list. We mentioned this in class, but this aspect of the statistic is a better line for a story. It sheds a more positive light on UMD Volleyball stats rather than the rather negative ranking of being #17. 
+Although Maryland comes in the rankings at number 17, they are also in the 95th percentile. This means that UMD is the same as or better than 95 percent of the teams on the list. We mentioned this in class, but this aspect of the statistic is a better line for a story. It sheds a more positive light on UMD Volleyball stats rather than the rather negative ranking of being #17. 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
 
