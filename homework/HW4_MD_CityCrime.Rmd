@@ -66,3 +66,21 @@ Whether it be property crime rates or violent crime rates, nine cities across Ma
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+
+### Task 10: Your task will be to take the violent crime rates for 2020 and do three things:
+
+Using the 2020 violent crime rate, calculate the percentiles using `ntile()`. Save the results to a new dataframe called `md_cities_percentiles`. How many cities are above the 90th percentile?
+ 
+
+Calculate the Interquartile Range of the 2020 violent crime rate using `summarize()` and R's `IQR()` function. The syntax is similar to how `mean()` works.
+```{r}
+md_cities_percentiles <- md_cities_change |> mutate(percentile = ntile(violent_rate_2020, 100))
+```
+# Ten Maryland cities are above the 90th percentile. 
+```{r}
+md_cities_percentiles |> summarize(interquartile = IQR(violent_rate_2020))
+```
+Do the results change your best story idea from the previous assignment? Why or why not?
+
+I do not think I would change my story from the one I had previously pitched. My previous story was about how 9 of the cities saw an increase of over 100% in crime, and with this new data, it would only be changing the perspective to 10 cities rather than 9. I do not think this newfound data is compelling enough to completely change my story's direction. 
