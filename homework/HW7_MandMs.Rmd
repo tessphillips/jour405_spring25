@@ -5,27 +5,49 @@ title: "HW7_MandMs"
 In this assignment, you'll be picking up where you left off with the M&Ms activity. You'll load the data and perform some basic statistical analysis. Follow the steps below to complete the assignment.
 
 ### Task 1: Load the tidyverse
+```{r}
+library(tidyverse)
+```
 
 
 ### Task 2: Load the M&Ms dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv
+```{r}
+candy <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv")
+```
+
+### Task 3: Sample 5 rows of data from the dataset, and then sample 10 rows, saving each to separate dataframes called sample5 and sample10.
+```{r}
+sample5 <- candy|> 
+  sample_n(5)
+sample10 <- candy|> 
+  sample_n(10)
+```
 
 
-### Task 3: Sample 5 rows of data from the dataset
+### Task 4: Calculate the mean and standard deviation of the samples, using one of the colors.
+```{r}
+sample10 |> summarize(mean = mean(red), sd = sd(red))
+sample5 |> summarize(mean = mean(red), sd = sd(red))
+```
 
 
-### Task 4: Calculate the mean age and standard deviation of the sample, using either the blue or white number of M&Ms
+### Task 5: Calculate the mean and standard deviation of the population, using the same color as Task 4
 
-
-### Task 5: Calculate the mean age and standard deviation of the population, using the same measure as in Task 4
+```{r}
+candy |> summarize(mean = mean(red), sd = sd(red))
+```
 
 
 ### Task 6: Compare the sample and population statistics
 
-Compare the two sets of means and standard deviations. Are they similar?
+Compare the three sets of means and standard deviations. Are they similar?
+
+Generally speaking, all of these means are pretty different. None of the means are super close to each other, but the standard deviations are more similar. They all fall in the 14 to 18 range, which is a lot smaller of a range than the means which has a range of 66-91.
 
 ### Task 7: Describe the results
 
 Write a few sentences about what you found in the data. What does this tell you about the M&Ms dataset and about the act of random sampling?
 
+After finding the means and standard deviations, I found that it is definitely more indicative of the whole population when you find the data for bigger samples. That way, more people are accounted for. 
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
