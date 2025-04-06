@@ -56,7 +56,7 @@ education_distribution
 
 Why might education levels in survey samples often differ from the general population? What factors might cause certain education groups to be over or underrepresented?
 
-
+Without further and more specific information about the sample size, we cannot rule out biases among participants. This could be a reason that the survey results may differ from the general population. Location could very well play a role in education groups to be over or underrepresented. For example, if the sample was conducted in a wealthier area, it is likely that college educated people may be overrepresented.
 
 
 ## Task 3: Unweighted Analysis by Education
@@ -235,12 +235,18 @@ Based on your analysis of weighted and unweighted results by education level, wr
 
 Based on this analysis, I was able to find out some interesting results about the difference that weighting makes to a data set. First of all, I recognized that there are definitely differences between the categories of education and their correspondence to whether or not that individual is an active voter. It was found that those with a college education are also the most active voters. Even those with part of a college degree are likely to vote. Those with only a high school degree (or less) are usually the least active. 
 
-Weighting the data removes biases and imbalances, as we previously stated. It allows us to view data with a more accurate lense, as it 
+Weighting the data removes biases and imbalances, as we previously stated. It allows us to view data with a more accurate lense, as it accounts for some errors. It gives us a more accurate understanding of the results found in this survey, showing us a better representation of the relationship between level of education and voting patterns. For a story on this survey, I would focus a story around the fact that those with a higher level of education are more likely to be active voters.
 
 ## Task 12: Final Reflection Questions
 
 1. Why is it important for journalists to understand survey weighting when reporting on polls?
 
+It is important to understand what the data looked like before and after weighting, as it accounts for errors and possible biases in the survey results.
+
 2. How might the differences between weighted and unweighted results affect how you would report on this data?
 
+If I was reporting on the story, I would probably focus my writing on the results with the weighting added, as it is more accurate. I would consider doing an extra section at the end that may talk about the differences in the data before and after weighting was added.
+
 3. What additional information would you want to know about how the weights were calculated before using this data in a news story?
+
+I would want more specific information about the group of people that was sampled. Was it truly random? Or was there overrepresentation due to other factors? I would want to make sure this was the most accurate poll before publishing a story on it. 
