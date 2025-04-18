@@ -1,0 +1,137 @@
+---
+title: "HW14"
+output: html_document
+---
+
+---
+title: "Diversity Index for Maryland Cities"
+author: "Tess Phillips"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Overview
+
+In this exercise, we will calculate the **USA TODAY Diversity Index** for Maryland cities with a population of at least 10,000 using 2020 Census race and ethnicity data. The Diversity Index reflects the probability that two randomly selected individuals from a city are of different races or ethnicities.
+
+A score of 0 indicates no diversity (everyone is the same race/ethnicity), while a score closer to 100 indicates higher diversity. The **most diverse city** has the highest index, reflecting a balanced mix of several racial and ethnic groups. The **least diverse** city likely has one overwhelmingly dominant racial/ethnic group.
+
+## Task 1: Load and Describe the Data (3 points)
+
+Run the following code to load the data, then examine it and describe what it contains. Based on the raw numbers alone, which cities stand out as diverse to you?
+
+After my first glance, Baltimore City stands out to me as the city with the most diversity. They have one of the highest populations, as well as one of the highest numbers of their population being two or more different races. 
+
+```{r load-data}
+md_cities <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/usat_diversity_index.csv")
+
+# Preview structure
+View(md_cities)
+```
+
+## Task 2: Calculate Race Percentages
+
+```{r race-percentages}
+md_cities <- md_cities |>
+  mutate(
+    White_pct = White / TotalPop,
+    Black_pct = Black / TotalPop,
+    Native_pct = Native / TotalPop,
+    Asian_pct = Asian / TotalPop,
+    NHPI_pct = NHPI / TotalPop
+  )
+```
+
+## Task 3: Square the Race Percentages
+
+We need to square the race percentages in order to calculate the probability that any two people chosen at random from a given census area are of different races or are Hispanic or not.
+
+```{r square-race}
+md_cities <- md_cities |>
+  mutate(
+    White_pct_sq = White_pct^2,
+    Black_pct_sq = Black_pct^2,
+    Native_pct_sq = Native_pct^2,
+    Asian_pct_sq = Asian_pct^2,
+    NHPI_pct_sq = NHPI_pct^2
+  )
+```
+
+
+## Task 4: Calculate Race Probabilities (3 points)
+
+The race probability is the sum the squared probabilities for each of the races. It represents the probability that two people randomly chosen from the same city will be of the same race. Which city has the highest race probability, and why do you think that is?
+
+It appears that Bethesda has the highest race probability, at a 9.65%. Bethesda is very close to DC, which is our nation's capital and a melting pot of many different types of people from different backgrounds. 
+
+```{r race-prob}
+md_cities <- md_cities |>
+  mutate(
+    Race_Prob = White_pct_sq + Black_pct_sq + Native_pct_sq + Asian_pct_sq + NHPI_pct_sq
+  ) |> 
+  arrange(desc(Race_Prob))
+
+View(md_cities)
+```
+
+
+## Task 5: Calculate Ethnicity Percentages and Their Squares (3 points)
+
+Hispanic origin is not a race but an ethnicity or nationality – and a separate Census question. The probability someone is Hispanic or not Hispanic must be calculated separately from race, and Hisp_Prob is the probability that two randomly selected people will be Hispanic or not. That's an important distinction, because unlike race probability, this measures the likelihood of a binary question: that both random people will be Hispanic. What do you notice about the cities with the *lowest* Hisp_Prob scores?
+
+I think that generally speaking, most of the cities with the lowest Hisp_prob scores also have a higher score for the population that is two or more races. There are exceptions to this, but this appears to be evident in a lot of cases. 
+
+```{r ethnicity}
+md_cities <- md_cities |>
+  mutate(
+    HispTotal = HISPANIC + NotHispanic,
+    Hisp_pct = HISPANIC / HispTotal,
+    NotHisp_pct = NotHispanic / HispTotal,
+    Hisp_pct_sq = Hisp_pct^2,
+    NotHisp_pct_sq = NotHisp_pct^2,
+    Hisp_Prob = Hisp_pct_sq + NotHisp_pct_sq
+  ) |> 
+  arrange(Hisp_Prob)
+
+View(md_cities)
+```
+
+## Task 6: Multiply Race and Ethnicity Probabilities
+
+Here we multiply the two probabilities together to get the probability that any two random people have the SAME race and ethnicity.
+
+```{r combined-prob}
+md_cities <- md_cities |>
+  mutate(
+    RaceEth_Prob = Race_Prob * Hisp_Prob
+  )
+```
+
+
+## Task 7: Calculate Diversity Index (3 points)
+
+The final step is to calculate the probability that two people randomly chosen WILL NOT BE OF THE SAME RACE OR ETHNICITY. In other words, the highest index scores will be cities where those two random people will be from different backgrounds. Put simply, more diverse. Which cities are the top 3, and where are they located? Look at the bottom of the list - which city is the least diverse, and where is it?
+
+The most diverse cities are Langley Park, Wheaton, and Adelphi - all of which are very close to each other and very near the border of Washington DC. Largo, Lake Arbor, and Lake Shore are all the lowest and they are all much farther away from DC than the top three are. 
+```{r diversity-index}
+md_cities <- md_cities |>
+  mutate(
+    Diversity_Index = (1 - RaceEth_Prob) * 100
+  ) |> 
+  arrange(desc(Diversity_Index))
+
+View(md_cities)
+```
+
+### Pitch a story (8 points)
+
+Given the data that you've produced here, write a headline and lede of the most interesting story from this exercise, and add below that details on how you would report it out: who you'd talk to and the questions you'd ask. When you describe the Diversity Index values, do so in a similar way to how USA Today did; the raw values themselves won't mean much to readers.
+
+Headline: New data shows more diversity in cities that border Washington, DC.
+
+Lede: According to new data, studies show that the closer a city is to Washington, DC, the more diversity they will have in their area. 
+
+When reporting on this story, the most important thing will be to compare values carefully across all MD cities, while comparing their proximity to DC. Doing math to calculate differences in percentages as well as difference in miles from DC will be very helpful to support the data. 
