@@ -330,7 +330,7 @@ For all of the outliers that are in the negatives, they have in common that they
 
 ## Your Best Story Pitch
 
-### Task 7 (5 points)
+### Task 7 (5 points) 
 Based on all the analyses performed, craft your best story pitch, including a headline and lede. Be sure to include what kinds of sources/people you'd talk to for the story.
 
 Pitch: I think that the most newsworthy story based on this data would be to look more in to the 2020 data. We could first talk about the drop in 2020, but then look at data to see how long it took to get back to the previously regular numbers. Were numbers still down for the years following the pandemic? We would examine that here. I would mostly need to talk to the police chief that was in charge at the time, asking him about patterns that he observed. 
